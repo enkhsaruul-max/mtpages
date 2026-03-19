@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for visual appeal -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- Header Section -->
+        <div class="bg-blue-900 text-white p-6 md:p-8 relative overflow-hidden">
+            <!-- Decorative Background Elements -->
+            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-blue-800 rounded-full opacity-50 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-indigo-800 rounded-full opacity-50 blur-3xl"></div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+                    <div>
+                        <div class="inline-flex items-center gap-2 bg-blue-800/50 rounded-lg px-3 py-1 mb-3 border border-blue-700/50">
+                            <i data-lucide="badge-check" class="w-4 h-4 text-yellow-400"></i>
+                            <span class="text-sm font-semibold text-blue-100 uppercase tracking-wide">Official MIAT USA Cargo Agent Mongoltown.com</span>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-bold leading-tight">Америкийн Нэгдсэн Улс болон Канад улсад амьдардаг Монголчуудын Үйлчилгээ</h1>
+                    </div>
+                    
+                    <!-- Flags Graphic -->
+                    <div class="flex items-center gap-4 bg-white/10 px-5 py-3 rounded-xl border border-white/10 backdrop-blur-sm shrink-0">
+                        <div class="flex items-center gap-3 border-r border-white/20 pr-4">
+                            <div class="flex flex-col items-center">
+                                <img src="https://flagcdn.com/w80/us.png" alt="USA" class="w-10 h-auto rounded shadow-sm object-cover">
+                                <span class="text-[10px] font-bold uppercase tracking-wider mt-1 text-blue-200">USA</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <img src="https://flagcdn.com/w80/ca.png" alt="Canada" class="w-10 h-auto rounded shadow-sm object-cover">
+                                <span class="text-[10px] font-bold uppercase tracking-wider mt-1 text-blue-200">CAN</span>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-6 h-6 text-blue-200 animate-pulse"></i>
+                        <div class="flex flex-col items-center pl-2">
+                            <img src="https://flagcdn.com/w80/mn.png" alt="Mongolia" class="w-10 h-auto rounded shadow-sm object-cover">
+                            <span class="text-[10px] font-bold uppercase tracking-wider mt-1 text-blue-200">MNG</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-blue-100 text-lg leading-relaxed mb-8 max-w-3xl">
+                    Хэрвээ та АНУ эсвэл Канад улсад оршин суудаг бол доорх хотуудын салбарт илгээмжээ биеэр авчрах эсхүл таны амьдарч буй хотод манай салбар байхгүй бол апп татаж аваад өөртөө ойр UPS Store -д аваачиж өгөөрэй.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="tel:3232078554" class="inline-flex items-center justify-center gap-2 bg-white text-blue-900 hover:bg-blue-50 transition px-5 py-3 rounded-lg font-semibold shadow-lg">
+                        <i data-lucide="phone" class="w-5 h-5"></i>
+                        323-207-8554
+                    </a>
+                    <a href="mailto:info@mongoltown.com" class="inline-flex items-center justify-center gap-2 bg-blue-800 hover:bg-blue-700 transition px-5 py-3 rounded-lg border border-blue-700 font-medium">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        info@mongoltown.com
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-8 space-y-10">
+
+            <!-- Los Angeles Section -->
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="map-pin" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-2xl font-bold text-gray-900">Los Angeles</h2>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-xs font-bold tracking-wider">
+                                <th class="p-4 border-b border-gray-200 min-w-[200px]">Хаяг / Байршил</th>
+                                <th class="p-4 border-b border-gray-200 whitespace-nowrap">Агаар</th>
+                                <th class="p-4 border-b border-gray-200 min-w-[200px]">Газар</th>
+                                <th class="p-4 border-b border-gray-200">Таслах цаг</th>
+                                <th class="p-4 border-b border-gray-200 min-w-[150px]">Цагийн хуваарь</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-gray-900">Torrance Branch</div>
+                                    <div class="text-gray-600 mt-1">
+                                        20675 S Western Ave, Ste #112<br>
+                                        Torrance, CA 90501
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top font-medium text-blue-700 whitespace-nowrap">$10 / kg</td>
+                                <td class="p-4 align-top">
+                                    <div class="font-medium text-green-700">$0.00064 / см.куб</div>
+                                    <div class="text-xs text-gray-500 mt-1">($50 min. Max weight 35kg, $1/each additional kg)</div>
+                                </td>
+                                <td class="p-4 align-top text-red-600 font-medium">Thursday 9:30am</td>
+                                <td class="p-4 align-top text-gray-600">
+                                    <span class="block"><span class="font-semibold text-gray-800">Mon-Fri:</span> 10am-6pm</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Sat:</span> 11am-4pm</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-gray-900">Koreatown Branch</div>
+                                    <div class="text-gray-600 mt-1">
+                                        3451 W 8th St,<br>
+                                        Los Angeles, CA 90005
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top font-medium text-blue-700 whitespace-nowrap">$10 / kg</td>
+                                <td class="p-4 align-top">
+                                    <div class="font-medium text-green-700">$0.00064 / см.куб</div>
+                                    <div class="text-xs text-gray-500 mt-1">($50 min. Max weight 35kg, $1/each additional kg)</div>
+                                </td>
+                                <td class="p-4 align-top text-red-600 font-medium">Thursday 9:30am</td>
+                                <td class="p-4 align-top text-gray-600">
+                                    <span class="block"><span class="font-semibold text-gray-800">Mon-Fri:</span> 10am-6pm</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Sat:</span> 11am-4pm</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Important Alerts -->
+            <div class="space-y-3">
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg flex gap-3">
+                    <i data-lucide="alert-triangle" class="text-red-500 shrink-0 mt-0.5"></i>
+                    <div>
+                        <h3 class="font-bold text-red-800 text-sm uppercase">Анхаар</h3>
+                        <p class="text-red-700">Oнлайн худалдаа эсвэл шуудангаар ачаа явуулж болохгүй!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- San Francisco Section -->
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="map-pin" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-2xl font-bold text-gray-900">San Francisco</h2>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-xs font-bold tracking-wider">
+                                <th class="p-4 border-b border-gray-200 min-w-[200px]">Хаяг / Байршил</th>
+                                <th class="p-4 border-b border-gray-200 whitespace-nowrap">Агаар</th>
+                                <th class="p-4 border-b border-gray-200 min-w-[100px]">Газар</th>
+                                <th class="p-4 border-b border-gray-200">Таслах цаг (Агаар)</th>
+                                <th class="p-4 border-b border-gray-200 min-w-[150px]">Цагийн хуваарь</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-gray-900">Sondor Salon</div>
+                                    <div class="text-gray-600 mt-1">
+                                        302 13th St,<br>
+                                        Oakland, CA 94612
+                                    </div>
+                                    <div class="text-blue-600 text-xs font-semibold mt-1">Tel: 510-517-4156</div>
+                                </td>
+                                <td class="p-4 align-top font-medium text-blue-700 whitespace-nowrap">$10 / kg</td>
+                                <td class="p-4 align-top text-gray-400 font-bold">-</td>
+                                <td class="p-4 align-top text-red-600 font-medium">Thur 3pm</td>
+                                <td class="p-4 align-top text-gray-600">
+                                    <span class="block"><span class="font-semibold text-gray-800">Mon-Tue:</span> 10-6</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Wed:</span> Closed</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Thur-Sat:</span> 10-6</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Sun:</span> 10-6</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-gray-900">Queens Houseware & Gift</div>
+                                    <div class="text-gray-600 mt-1">
+                                        1877 Geary Blvd,<br>
+                                        San Francisco, CA 94115
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top font-medium text-blue-700 whitespace-nowrap">$10 / kg</td>
+                                <td class="p-4 align-top text-gray-400 font-bold">-</td>
+                                <td class="p-4 align-top text-red-600 font-medium">Thur 3pm</td>
+                                <td class="p-4 align-top text-gray-600">
+                                    <span class="block"><span class="font-semibold text-gray-800">Mon-Sat:</span> 10-5</span>
+                                    <span class="block"><span class="font-semibold text-gray-800">Sun:</span> 2-5</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-gray-900">KP Asian Market</div>
+                                    <div class="text-gray-600 mt-1">
+                                        2370 Telegraph Ave,<br>
+                                        Oakland, CA 94612
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top font-medium text-blue-700 whitespace-nowrap">$10 / kg</td>
+                                <td class="p-4 align-top text-gray-400 font-bold">-</td>
+                                <td class="p-4 align-top text-red-600 font-medium">Thur 3pm</td>
+                                <td class="p-4 align-top text-gray-600">
+                                    <span class="block"><span class="font-semibold text-gray-800">Everyday:</span> 8am-9pm</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Rest of United States Section -->
+            <section>
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="globe" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-2xl font-bold text-gray-900">Rest of United States</h2>
+                </div>
+
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50 blur-xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1 space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-indigo-900 flex items-center gap-2">
+                                        <i data-lucide="smartphone" class="w-5 h-5 text-indigo-600"></i>
+                                        Hotel4box SelfServe App
+                                    </h3>
+                                    <p class="text-gray-700 mt-2 leading-relaxed">
+                                        App Store дээрээс <span class="font-bold text-indigo-700">Hotel4box SelfServe</span> апп татаад 50 мужийн аль ч UPS store дээр ачаагаа өгч болно.
+                                    </p>
+                                    <div class="mt-3">
+                                        <a href="https://www.facebook.com/share/v/1FEHfqZojV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
+                                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                                            Заавар бичлэг үзэх
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white/80 border border-indigo-100 rounded-lg p-4 text-sm space-y-2">
+                                    <p class="text-red-600 font-semibold flex items-center gap-2">
+                                        <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                                        Alaska, Hawaii нэмэгдэлтэй
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-auto flex flex-col items-center justify-center bg-white p-5 rounded-lg border border-indigo-100 shadow-sm text-center">
+                                <div class="bg-indigo-100 p-3 rounded-full mb-3">
+                                    <i data-lucide="box" class="w-6 h-6 text-indigo-600"></i>
+                                </div>
+                                <span class="font-bold text-gray-900 block mb-1">UPS Drop-off</span>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">50 States</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Canada Section -->
+            <section class="border-t border-gray-100 pt-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://flagcdn.com/w40/ca.png" alt="Canada" class="w-6 h-auto rounded shadow-sm object-cover">
+                    <h2 class="text-2xl font-bold text-gray-900">Canada</h2>
+                </div>
+
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-red-100 rounded-full opacity-50 blur-xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="flex-1 space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-red-900 flex items-center gap-2">
+                                        <i data-lucide="smartphone" class="w-5 h-5 text-red-600"></i>
+                                        Hotel4box SelfServe App
+                                    </h3>
+                                    <p class="text-gray-700 mt-2 leading-relaxed">
+                                        App Store дээрээс <span class="font-bold text-red-700">Hotel4box SelfServe</span> апп татаад Канад улсын аль ч UPS store дээр ачаагаа өгч болно.
+                                    </p>
+                                    <div class="mt-3">
+                                        <a href="https://www.facebook.com/share/v/1FEHfqZojV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
+                                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                                            Заавар бичлэг үзэх
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-auto flex flex-col items-center justify-center bg-white p-5 rounded-lg border border-red-100 shadow-sm text-center">
+                                <div class="bg-red-100 p-3 rounded-full mb-3">
+                                    <i data-lucide="box" class="w-6 h-6 text-red-600"></i>
+                                </div>
+                                <span class="font-bold text-gray-900 block mb-1">UPS Drop-off</span>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Canada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Delivery in Mongolia -->
+            <section class="border-t border-gray-100 pt-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="truck" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-2xl font-bold text-gray-900">Монгол дахь хүргэлт</h2>
+                </div>
+
+                <!-- Combined Cargo Card -->
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="bg-blue-50 p-4 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-blue-900 flex items-center gap-2">
+                            <i data-lucide="package-check" class="w-5 h-5"></i> Агаарын болон Газрын ачаа (MOExpress)
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-6 text-sm">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-gray-500"></i> Хаяг
+                                </h4>
+                                <p class="text-gray-600 leading-relaxed text-base">
+                                    Нарны хороолол 9-р байр, БЗД, 26-р хороо, Улаанбаатар
+                                </p>
+                                <a href="https://maps.app.goo.gl/ZEWsak4ZeyNBVrUz9" target="_blank" class="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium mt-2">
+                                    Google Maps дээр харах <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                        <i data-lucide="phone" class="w-4 h-4 text-gray-500"></i> Утас
+                                    </h4>
+                                    <p class="text-blue-600 font-medium text-base">70114200, 88116633, 99441290, 99069915</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                        <i data-lucide="clock" class="w-4 h-4 text-gray-500"></i> Цагийн хуваарь
+                                    </h4>
+                                    <ul class="text-gray-600 space-y-1">
+                                        <li class="flex justify-between max-w-xs"><span class="font-medium">Даваа-Баасан:</span> <span>9:00-18:00</span></li>
+                                        <li class="flex justify-between max-w-xs"><span class="font-medium">Бямба:</span> <span>10:00-15:00</span></li>
+                                        <li class="flex justify-between max-w-xs text-red-500"><span class="font-medium">Ням:</span> <span>Амарна</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customs & Tax Section -->
+            <section class="border-t border-gray-100 pt-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="scale" class="w-6 h-6 text-blue-600"></i>
+                    <h2 class="text-2xl font-bold text-gray-900">Монголын татварын тухай</h2>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden divide-y divide-gray-100">
+                    <!-- Tax Exemption Rules -->
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3">Ямар илгээмжийг татвараас чөлөөлөх вэ?</h3>
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r mb-4">
+                            <p class="text-green-800 font-medium">
+                                Татваргүй авах боломжит дээд хэмжээ: <span class="text-lg font-bold">7,920,000₮</span>
+                            </p>
+                            <p class="text-xs text-green-700 mt-1">2025 оны 4-р сарын 1-ээс эхлэн хөдөлмөрийн хөлсний доод хэмжээ 792,000₮ болсноор.</p>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Гаалийн болон НӨАТ-ын хуулийн дагуу нэг сарын хөдөлмөрийн хөлсний доод хэмжээг 10 дахин нэмэгдүүлснээс дээшгүй үнийн дүнтэй, <span class="font-bold text-gray-900">ижил төрлийн хоёроос илүүгүй</span> бараа бүхий хувь хүний нэр дээр ирсэн илгээмжийг татвараас чөлөөлнө.
+                        </p>
+                        
+                        <!-- Laptop Exception -->
+                        <div class="flex items-start gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200 mb-4">
+                            <i data-lucide="laptop" class="w-5 h-5 text-gray-500 mt-0.5"></i>
+                            <div>
+                                <span class="block font-bold text-gray-900 text-sm">Компьютер хөнгөлөлт</span>
+                                <p class="text-xs text-gray-600">Зөөврийн компьютерийн хувьд хөдөлмөрийн хөлсний доод хэмжээг <span class="font-bold">30 дахин (23,760,000₮)</span> нэмэгдүүлснээс дээшгүй үнийн дүнтэй бол татваргүй.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm text-gray-600">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Ижил төрлийн бараа гэж юу вэ?</h4>
+                                <p>Үнийг нь тодорхойлж байгаа бараатай бүх талаараа адил биш боловч үндсэн шинж байдал, бүрдэл хэсэг, зориулалтаараа ижил, арилжааны талаас нь аль алинаа орлож чадах барааг хэлнэ. (Жишээ нь: 3 өөр өнгийн цамц ирсэн ч "цамц" гэдэг төрлөөрөө ижил тул 2-оос дээш бол татварт орно).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Footer -->
+        <div class="bg-gray-50 border-t border-gray-200 p-6 text-center text-sm text-gray-500">
+            <div class="flex justify-center gap-4 mb-4">
+                <a href="https://mongoltown.com" class="text-blue-600 hover:text-blue-800 font-medium">MongolTown.com руу буцах</a>
+            </div>
+            &copy; <script>document.write(new Date().getFullYear())</script> Mongol Town Shipping Services.
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
