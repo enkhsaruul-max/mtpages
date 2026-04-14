@@ -1,0 +1,499 @@
+import React, { useState } from 'react';
+import { ShoppingBag, X, Plus, Trash2, Link as LinkIcon, Send, CheckCircle, Package, MapPin, User, Book } from 'lucide-react';
+
+export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [items, setItems] = useState([{ id: Date.now(), url: '', size: '', color: '', price: '', qty: 1 }]);
+  const [receiver, setReceiver] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    address: '',
+    deliveryMethod: 'delivery'
+  });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [status, setStatus] = useState('idle'); // 'idle', 'submitting', 'success'
+
+  // Address book mock data (Хаягийн дэвтрийн жишээ өгөгдөл)
+  const savedAddresses = [
+    { id: '1', firstName: 'Бат', lastName: 'Дорж', phone: '99112233', address: 'Улаанбаатар хот, СБД, 1-р хороо, 12-р байр, 34 тоот', deliveryMethod: 'delivery' },
+    { id: '2', firstName: 'Болд', lastName: 'Сүх', phone: '88776655', address: '', deliveryMethod: 'pickup' },
+  ];
+
+  const openModal = () => setIsOpen(true);
+  
+  const closeModal = () => {
+    setIsOpen(false);
+    // Reset after closing so it's fresh next time
+    setTimeout(() => {
+      setStatus('idle');
+      setItems([{ id: Date.now(), url: '', size: '', color: '', price: '', qty: 1 }]);
+      setReceiver({ firstName: '', lastName: '', phone: '', address: '', deliveryMethod: 'delivery' });
+      setAgreedToTerms(false);
+    }, 300);
+  };
+
+  const handleAddItem = () => {
+    setItems([...items, { id: Date.now(), url: '', size: '', color: '', price: '', qty: 1 }]);
+  };
+
+  const handleRemoveItem = (idToRemove) => {
+    if (items.length > 1) {
+      setItems(items.filter(item => item.id !== idToRemove));
+    }
+  };
+
+  const handleItemChange = (id, field, value) => {
+    setItems(items.map(item => 
+      item.id === id ? { ...item, [field]: value } : item
+    ));
+  };
+
+  const handleReceiverChange = (e) => {
+    const { name, value } = e.target;
+    setReceiver({ ...receiver, [name]: value });
+  };
+
+  const handleAddressBookSelect = (e) => {
+    const selectedId = e.target.value;
+    if (selectedId === 'new') {
+      setReceiver({ firstName: '', lastName: '', phone: '', address: '', deliveryMethod: 'delivery' });
+    } else {
+      const addr = savedAddresses.find(a => a.id === selectedId);
+      if (addr) {
+        setReceiver({ ...addr });
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Basic validation
+    const isValid = items.every(item => item.url.trim() !== '');
+    if (!isValid) {
+      alert("Бүх бараанд хүчинтэй дэлгүүрийн линк оруулсан эсэхээ шалгана уу.");
+      return;
+    }
+
+    if (!receiver.firstName.trim() || !receiver.lastName.trim() || !receiver.phone.trim()) {
+      alert("Хүлээн авагчийн мэдээллийг бүрэн оруулна уу.");
+      return;
+    }
+
+    if (receiver.deliveryMethod === 'delivery' && !receiver.address.trim()) {
+      alert("Хүргүүлэх хаягаа оруулна уу.");
+      return;
+    }
+
+    if (!agreedToTerms) {
+      alert("Та үйлчилгээний нөхцөлийг зөвшөөрснөөр захиалга илгээх боломжтой.");
+      return;
+    }
+
+    setStatus('submitting');
+
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+    }, 1500);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col items-center justify-center relative">
+      
+      {/* Background Mockup for hotel4box.com */}
+      <div className="text-center space-y-6 p-8">
+        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">
+          <span className="text-blue-600">hotel4box.com</span>-д тавтай морил
+        </h1>
+        <p className="text-lg text-slate-600 max-w-xl mx-auto">
+          Дэлхийн хаанаас ч худалдан авалт хийгээрэй. Бид таны илгээмжийг хүлээн авч, танд найдвартай, хурдан шуурхай хүргэж өгөх болно.
+        </p>
+        
+        {/* Trigger Button */}
+        <button
+          onClick={openModal}
+          className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/20 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        >
+          <ShoppingBag className="h-5 w-5 transition-transform group-hover:-translate-y-1" />
+          <span>Buy4Me эхлүүлэх</span>
+        </button>
+      </div>
+
+      {/* Modal Backdrop */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <div 
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+            onClick={closeModal}
+          />
+          
+          {/* Modal Content */}
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+            
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+              <div className="flex items-center gap-3">
+                <div className="bg-blue-100 p-2 rounded-lg text-blue-600">
+                  <Package className="h-6 w-6" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900 leading-none">buy4me</h2>
+                  <p className="text-sm text-slate-500 mt-1">hotel4box.com-оос</p>
+                </div>
+              </div>
+              <button 
+                onClick={closeModal}
+                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors focus:outline-none"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Authentication Banner (Inside Modal) */}
+            {status !== 'success' && (
+              <div className="bg-blue-50/50 border-b border-blue-100 px-6 py-3 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-sm text-slate-700">
+                  <User className="h-4 w-4 text-blue-600" />
+                  <span>Та захиалга өгөхийн тулд нэвтэрнэ үү.</span>
+                </div>
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <button type="button" className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-blue-200 hover:bg-blue-50 hover:border-blue-300 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-1">
+                    Нэвтрэх
+                  </button>
+                  <button type="button" className="flex-1 sm:flex-none px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-1">
+                    Бүртгүүлэх
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Body */}
+            <div className="flex-1 overflow-y-auto p-6">
+              {status === 'success' ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center space-y-4 animate-in fade-in slide-in-from-bottom-4">
+                  <div className="h-20 w-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-4">
+                    <CheckCircle className="h-10 w-10" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900">Хүсэлт амжилттай илгээгдлээ!</h3>
+                  <p className="text-slate-600 max-w-md mx-auto">
+                    Бид таны buy4me хүсэлтийг хүлээн авлаа. Манай баг таны илгээсэн линкүүдийг шалгаад удахгүй нэхэмжлэх илгээх болно.
+                  </p>
+                  <button 
+                    onClick={closeModal}
+                    className="mt-6 px-6 py-2.5 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors"
+                  >
+                    Цонхыг хаах
+                  </button>
+                </div>
+              ) : (
+                <form id="buy4me-form" onSubmit={handleSubmit} className="space-y-6">
+                  <p className="text-slate-600 text-sm">
+                    Биднээр захиалуулахыг хүссэн барааны линкээ оруулна уу. Хэмжээ болон өнгийг аль болох тодорхой бичнэ үү.
+                  </p>
+
+                  <div className="space-y-6">
+                    {items.map((item, index) => (
+                      <div key={item.id} className="relative bg-slate-50 border border-slate-200 rounded-xl p-5 transition-all hover:border-blue-300 hover:shadow-sm">
+                        
+                        {/* Remove Item Button (only show if more than 1 item) */}
+                        {items.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveItem(item.id)}
+                            className="absolute -top-3 -right-3 bg-white border border-slate-200 text-red-500 hover:bg-red-50 hover:text-red-600 p-1.5 rounded-full shadow-sm transition-colors"
+                            title="Устгах"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        )}
+                        
+                        <div className="flex items-center gap-2 mb-4">
+                          <div className="bg-blue-600 text-white text-xs font-bold h-6 w-6 rounded-full flex items-center justify-center">
+                            {index + 1}
+                          </div>
+                          <h4 className="font-semibold text-slate-800">Барааны мэдээлэл</h4>
+                        </div>
+
+                        <div className="space-y-4">
+                          {/* Store Link */}
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                              Онлайн дэлгүүрийн линк *
+                            </label>
+                            <div className="relative">
+                              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <LinkIcon className="h-4 w-4 text-slate-400" />
+                              </div>
+                              <input
+                                type="url"
+                                required
+                                value={item.url}
+                                onChange={(e) => handleItemChange(item.id, 'url', e.target.value)}
+                                placeholder="https://www.amazon.com/dp/B08... "
+                                className="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Attributes Row - Changed to 2x2 grid for better spacing */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Хэмжээ <span className="text-slate-400 font-normal text-xs">(Заавал биш)</span>
+                              </label>
+                              <input
+                                type="text"
+                                value={item.size}
+                                onChange={(e) => handleItemChange(item.id, 'size', e.target.value)}
+                                placeholder="жишээ нь: M, XL, 10.5"
+                                className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                              />
+                            </div>
+                            
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Өнгө <span className="text-slate-400 font-normal text-xs">(Заавал биш)</span>
+                              </label>
+                              <input
+                                type="text"
+                                value={item.color}
+                                onChange={(e) => handleItemChange(item.id, 'color', e.target.value)}
+                                placeholder="жишээ нь: black, white..."
+                                className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Үнэ (Нэгжийн) *
+                              </label>
+                              <input
+                                type="number"
+                                required
+                                min="0"
+                                step="0.01"
+                                value={item.price}
+                                onChange={(e) => handleItemChange(item.id, 'price', e.target.value)}
+                                placeholder="жишээ нь: 25.99"
+                                className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Тоо ширхэг *
+                              </label>
+                              <input
+                                type="number"
+                                required
+                                min="1"
+                                value={item.qty}
+                                onChange={(e) => handleItemChange(item.id, 'qty', parseInt(e.target.value) || 1)}
+                                className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Add another item button */}
+                  <button
+                    type="button"
+                    onClick={handleAddItem}
+                    className="w-full py-3 border-2 border-dashed border-slate-300 text-slate-600 rounded-xl font-medium flex items-center justify-center gap-2 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+                  >
+                    <Plus className="h-5 w-5" />
+                    <span>Өөр линк нэмэх</span>
+                  </button>
+
+                  {/* Receiver Information Section */}
+                  <div className="pt-6 mt-6 border-t border-slate-200">
+                    <div className="flex items-center gap-2 mb-4">
+                      <User className="h-5 w-5 text-slate-400" />
+                      <h4 className="font-semibold text-slate-800">Хүлээн авагчийн мэдээлэл</h4>
+                    </div>
+                    
+                    {/* Address Book Selector */}
+                    <div className="mb-5 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                      <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                        <Book className="h-4 w-4 text-blue-600" />
+                        Хаягийн дэвтрээс сонгох
+                      </label>
+                      <select
+                        onChange={handleAddressBookSelect}
+                        className="block w-full px-3 py-2.5 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm bg-white text-slate-700 cursor-pointer"
+                      >
+                        <option value="new">+ Шинэ хаяг оруулах</option>
+                        {savedAddresses.map(addr => (
+                          <option key={addr.id} value={addr.id}>
+                            {addr.lastName} {addr.firstName} - {addr.phone} ({addr.deliveryMethod === 'delivery' ? 'Хүргэлт' : 'Очиж авах'})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">
+                            Овог *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            name="lastName"
+                            value={receiver.lastName}
+                            onChange={handleReceiverChange}
+                            className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">
+                            Нэр *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            name="firstName"
+                            value={receiver.firstName}
+                            onChange={handleReceiverChange}
+                            className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">
+                          Утасны дугаар *
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          name="phone"
+                          value={receiver.phone}
+                          onChange={handleReceiverChange}
+                          placeholder="9911..."
+                          className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm"
+                        />
+                      </div>
+
+                      {/* Delivery Options */}
+                      <div className="pt-2">
+                        <label className="block text-sm font-medium text-slate-700 mb-2">
+                          Хүлээн авах хэлбэр *
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <label className={`cursor-pointer flex items-start gap-3 p-3 border rounded-lg transition-all ${receiver.deliveryMethod === 'delivery' ? 'border-blue-600 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
+                            <input
+                              type="radio"
+                              name="deliveryMethod"
+                              value="delivery"
+                              checked={receiver.deliveryMethod === 'delivery'}
+                              onChange={handleReceiverChange}
+                              className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-600 mt-0.5"
+                            />
+                            <span className="flex flex-col">
+                              <span className="text-sm font-medium text-slate-800">Хүргэлтээр авах</span>
+                              <span className="text-xs text-slate-500 mt-0.5">Өөрийн хаягаар хүргүүлэх</span>
+                            </span>
+                          </label>
+                          <label className={`cursor-pointer flex items-start gap-3 p-3 border rounded-lg transition-all ${receiver.deliveryMethod === 'pickup' ? 'border-blue-600 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
+                            <input
+                              type="radio"
+                              name="deliveryMethod"
+                              value="pickup"
+                              checked={receiver.deliveryMethod === 'pickup'}
+                              onChange={handleReceiverChange}
+                              className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-600 mt-0.5"
+                            />
+                            <span className="flex flex-col">
+                              <span className="text-sm font-medium text-slate-800">УБ түншийн оффисоос очиж авах</span>
+                              <span className="text-xs text-slate-500 mt-0.5">Хаяг: Нарны хороолол 9-р байр</span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Address Input (Conditionally rendered) */}
+                  {receiver.deliveryMethod === 'delivery' && (
+                    <div className="animate-in fade-in slide-in-from-top-2 duration-200">
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        Хаяг *
+                      </label>
+                      <textarea
+                        required={receiver.deliveryMethod === 'delivery'}
+                        name="address"
+                        value={receiver.address}
+                        onChange={handleReceiverChange}
+                        placeholder="Улаанбаатар хот, ... дүүрэг, ... хороо, ... байр/гудамж, ... тоот."
+                        className="block w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-shadow text-sm min-h-[80px] resize-y"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Terms of Service */}
+              <div className="pt-6 mt-6 border-t border-slate-200">
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="flex items-center h-5">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={agreedToTerms}
+                      onChange={(e) => setAgreedToTerms(e.target.checked)}
+                      className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-600 focus:ring-2 transition-colors mt-0.5"
+                    />
+                  </div>
+                  <span className="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">
+                    Би <a href="#" className="text-blue-600 hover:text-blue-700 hover:underline">үйлчилгээний нөхцөл</a>-ийг уншиж танилцсан бөгөөд зөвшөөрч байна. *
+                  </span>
+                </label>
+              </div>
+
+            </form>
+          )}
+        </div>
+
+        {/* Footer */}
+            {status !== 'success' && (
+              <div className="border-t border-slate-100 px-6 py-4 bg-slate-50 flex items-center justify-end gap-3 rounded-b-2xl">
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  disabled={status === 'submitting'}
+                  className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-200 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-slate-300 disabled:opacity-50"
+                >
+                  Цуцлах
+                </button>
+                <button
+                  type="submit"
+                  form="buy4me-form"
+                  disabled={status === 'submitting'}
+                  className="px-6 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center gap-2 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:opacity-70"
+                >
+                  {status === 'submitting' ? (
+                    <>
+                      <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Илгээж байна...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      <span>Хүсэлт илгээх</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+            
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
